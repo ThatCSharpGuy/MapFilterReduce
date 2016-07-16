@@ -40,8 +40,6 @@ namespace MapFilterReduce
 
             var arraySum = array.Aggregate((acc, x) => acc + x);
 
-            Console.WriteLine(arraySum);
-
             Console.Read();
         }
 
