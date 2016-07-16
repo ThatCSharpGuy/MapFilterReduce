@@ -52,9 +52,6 @@ let main argv =
 
     let arraySum = array.Aggregate( fun acc x -> acc + x)
 
-    printf "%d" arraySum
-//    let arraySum = array.Aggregate( fun acc x -> acc + x)
-
     System.Console.ReadKey() |> ignore
 
     0 // devolver un código de salida entero
