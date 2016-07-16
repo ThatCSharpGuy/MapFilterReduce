@@ -5,15 +5,15 @@ let squareArray arr =
     let result = new List<int>()
     for x in arr do
         result.Add(x * x)
-    result
+    result.ToArray()
 
-let getJpgImages images : List<string> = 
+let getJpgImages images : string array = 
     let result = new List<string>()
     for x : string in images do
         if (x.EndsWith(".jpg")) then result.Add(x)
-    result
+    result.ToArray()
 
-let sum (arr : List<int>) : int = 
+let sum arr : int = 
     let mutable result : int = 0
     for x in arr do
         result <- result + x
@@ -36,24 +36,42 @@ let scale(city : City ) : City =
 [<EntryPoint>]
 let main argv = 
 
+    System.Console.WriteLine("Map");
     // Map
     // El arreglo que queremos transformar
-    let array = new List<int>([| 2; 3; 4; 5; 6; 7; 8; 9; 10 |])
+    let array = [| 2; 3; 4; 5; 6; 7; 8; 9; 10 |]
     //let squaredArray = squareArray array
-    let squaredArray = array.Select(fun x -> x * x).ToList()
+    let squaredArray = 
+        array
+        |> Array.map(fun x -> x * x)
 
+    for n in squaredArray do
+        System.Console.Write(n.ToString() + " ")
+
+
+    System.Console.WriteLine("\nFilter");
     // Filter
     // El arreglo que queremos filtrar
-    let images = new List<string>([| "hello.jpg"; "world.jpg"; "hola.png"; "mundo.png"; "cats.jpg"; "dogs.png" |])
+    let images = [| "hello.jpg"; "world.jpg"; "hola.png"; "mundo.png"; "cats.jpg"; "dogs.png" |]
     //let jpgImages = getJpgImages images
-    let jpgImages = images.Where(fun image -> image.EndsWith(".jpg")).ToList()
+    let jpgImages = 
+        images
+        |> Array.filter(fun image -> image.EndsWith(".jpg"))
 
+    for images in jpgImages do
+        System.Console.Write(images + " ")
+
+    System.Console.WriteLine("\nReduce");
     // Reduce
-
     //let arraySum = sum(array); // 54
-    let arraySum = array.Aggregate(fun acc x -> acc + x)
 
+    let arraySum = 
+        array
+        |> Array.reduce(fun acc x -> acc + x)
 
+    System.Console.Write(arraySum)
+
+    System.Console.WriteLine("\nCombinación");
     // Combinación
     // Vamos a definir varios ejemplos de ciudades, y meterlos en un arreglo
     let paris = new City("Paris", 2243)
@@ -72,4 +90,5 @@ let main argv =
     System.Console.WriteLine(citiesFilter)
 
     System.Console.ReadKey() |> ignore
+
     0 // devolver un código de salida entero
