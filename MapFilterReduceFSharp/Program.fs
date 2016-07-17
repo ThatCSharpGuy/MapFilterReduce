@@ -19,6 +19,7 @@ let sum arr : int =
         result <- result + x
     result
 
+// Suponiendo que tenemos la siguiente estructura de ciudades
 type City = 
     struct
         val Name : string
@@ -40,10 +41,10 @@ let main argv =
     // Map
     // El arreglo que queremos transformar
     let array = [| 2; 3; 4; 5; 6; 7; 8; 9; 10 |]
-    //let squaredArray = squareArray array
+    //let squaredArray = squareArray array  // [4, 9, 16, 25, 36, 49, 64, 81, 100]
     let squaredArray = 
         array
-        |> Array.map(fun x -> x * x)
+        |> Array.map(fun x -> x * x)  // [4, 9, 16, 25, 36, 49, 64, 81, 100]
 
     for n in squaredArray do
         System.Console.Write(n.ToString() + " ")
@@ -52,11 +53,17 @@ let main argv =
     System.Console.WriteLine("\nFilter");
     // Filter
     // El arreglo que queremos filtrar
-    let images = [| "hello.jpg"; "world.jpg"; "hola.png"; "mundo.png"; "cats.jpg"; "dogs.png" |]
-    //let jpgImages = getJpgImages images
+    let images = [| 
+        "hello.jpg"
+        "world.jpg" 
+        "hola.png" 
+        "mundo.png"
+        "cats.jpg" 
+        "dogs.png" |]
+    //let jpgImages = getJpgImages images // ["hello.jpg", "world.jpg", "cats.jpg"]
     let jpgImages = 
         images
-        |> Array.filter(fun image -> image.EndsWith(".jpg"))
+        |> Array.filter(fun image -> image.EndsWith(".jpg")) // ["hello.jpg", "world.jpg", "cats.jpg"]
 
     for images in jpgImages do
         System.Console.Write(images + " ")
@@ -67,7 +74,7 @@ let main argv =
 
     let arraySum = 
         array
-        |> Array.reduce(fun acc x -> acc + x)
+        |> Array.reduce(fun acc x -> acc + x) // 54
 
     System.Console.Write(arraySum)
 
